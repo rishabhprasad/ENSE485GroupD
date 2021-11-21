@@ -9,7 +9,8 @@ pip install -r requirements.txt
 
 # Kafka Sink Commands
 
-```curl -X PUT http://localhost:8083/connectors/sink-postgres-test/config \
+```
+curl -X PUT http://localhost:8083/connectors/sink-postgres-airQ/config \
     -H "Content-Type: application/json" \
     -d '{
         "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
@@ -24,7 +25,7 @@ pip install -r requirements.txt
         "pk.mode":"kafka",
         "insert.mode": "upsert",
         "db.timezone":"UTC",
-        "table.name.format":"AirQuality",
+        "table.name.format":"airquality",
         "value.converter": "io.confluent.connect.avro.AvroConverter",
         "value.converter.schemas.enable":"true",
         "value.converter.schema.registry.url": "http://schema-registry:8081",
