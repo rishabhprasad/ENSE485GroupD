@@ -11,9 +11,9 @@ from confluent_kafka.serialization import StringSerializer
 from confluent_kafka.schema_registry import SchemaRegistryClient
 from confluent_kafka.schema_registry.avro import AvroSerializer
 
-from utilities.config import load_config
-from utilities.load_avro_schema import load_avro_schema
-config = load_config()
+# from utilities.config import load_config
+# from utilities.load_avro_schema import load_avro_schema
+# config = load_config()
 
 def msg_to_dict(msg, ctx):
     return dict (city=msg.city, lat=msg.lat, long=msg.long, pm25=msg.pm25)
@@ -54,7 +54,7 @@ def call_producer(message, bootstrap_servers, schema_url, topic):
     producer.flush()
 
 def main():
-    bootstrap_servers= 'http://localhost:9092'
+    bootstrap_servers= 'localhost:9092'
     schema_url = "http://localhost:8081"
     topic = 'AirQuality2020'
     filepath = './data/waqi-covid19-airqualitydata-2020.csv'
