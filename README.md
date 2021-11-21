@@ -4,6 +4,9 @@
 
 Rishabh Prasad, William Peers, Nolan Flegel, Timothy Pasion, Joseph Bello
 
+# Python Setup
+pip install -r requirements.txt
+
 # Kafka Sink Commands
 
 ```curl -X PUT http://localhost:8083/connectors/sink-postgres-test/config \
