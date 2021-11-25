@@ -1,0 +1,23 @@
+{
+	"name": "PostgreSink",
+	"config": {
+		"connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+		"connection.url": "jdbc:postgresql://postgres:5432/ENSE485",
+		"connection.user": "aqicn",
+		"connection.password": "GuiltySpark343",
+		"tasks.max": "1",
+		"topics":"AirQuality2020",
+		"db.name":"ENSE485",
+		"auto.create":"true",
+		"auto.evolve":"true",
+		"pk.mode":"kafka",
+		"insert.mode": "upsert",
+		"db.timezone":"UTC",
+		"table.name.format":"airquality",
+		"value.converter": "io.confluent.connect.avro.AvroConverter",
+		"value.converter.schemas.enable":"true",
+		"value.converter.schema.registry.url": "http://schema-registry:8081",
+		"key.converter": "org.apache.kafka.connect.storage.StringConverter",
+		"key.converter.schema.registry.url": "http://schema-registry:8081"
+	}
+}
