@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <style>
+      td {
+        width: 150px;
+        text-align: center;
+        border: 1px solid black;
+        padding: 5px;
+      }
+    </style>
+
+    <h1> Future Prediction </h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>City</th>
+          <th>Specie</th>
+          <th>Prediction</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in prediction %}
+        <tr>
+          <td>{{p[0]}}</td>
+          <td>{{p[1]}}</td>
+          <td>{{p[2]}}</td>
+          <td>{{p[3]}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h1>City Performance</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Country</th>
+          <th>City</th>
+          <th>Type</th>
+          <th>Median</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in data %}
+        <tr>
+          <td>{{row[3]}}</td>
+          <td>{{row[4]}}</td>
+          <td>{{row[5]}}</td>
+          <td>{{row[6]}}</td>
+          <td>{{row[10]}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    
+  </body>
+</html>

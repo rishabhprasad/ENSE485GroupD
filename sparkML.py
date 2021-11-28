@@ -27,22 +27,22 @@ dataset = df.select(     col('count').cast('float'),
                          col('max').cast('float'),
                          col('median').cast('float'),
                          col('variance').cast('float'),
-                         col('Specie'),
-                         col('Country'),
-                         col('City')
+                         col('specie'),
+                         col('country'),
+                         col('city')
                         )
 dataset = StringIndexer(
-    inputCol='Country', 
+    inputCol='country', 
     outputCol='iCountry',
     handleInvalid='skip').fit(dataset).transform(dataset)
 
 dataset = StringIndexer(
-    inputCol='City', 
+    inputCol='city', 
     outputCol='iCity', 
     handleInvalid='skip').fit(dataset).transform(dataset)       
 
 dataset = StringIndexer(
-    inputCol='Specie', 
+    inputCol='specie', 
     outputCol='iSpecie', 
     handleInvalid='skip').fit(dataset).transform(dataset)       
 
@@ -77,7 +77,7 @@ r.intercept
 
 predictions = r.evaluate(test_data)
 
-output = predictions.predictions.select("Country","City","specie","prediction").where("specie = 'pm25'")
+output = predictions.predictions.select("country","city","specie","prediction").where("specie = 'pm25'")
 
 output.printSchema()
 

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <!-- <link rel="stylesheet" href="index.css" /> -->
+    <style>
+      .button {
+        height: 75px;
+        width: 150px;
+        background-color: green;
+        color: #ffffff;
+        font-size: 16px;
+      }
+      .button:hover {
+        background-color: black;
+        border-color: black;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 align="center">ENSE 485 Project - Air Quality Data</h2>
+    <br />
+    <h3 align="center">Nolan Flegel</h3>
+    <h3 align="center">Rishabh Prasad</h3>
+    <h3 align="center">Will Peers</h3>
+    <h3 align="center">Tim Pasion</h3>
+    <h3 align="center">Joseph Bello</h3>
+    <br />
+
+    <div align="center">
+    <form action="{{ url_for('fetchTable', name=city) }}" method="get">
+      <label for="city">Choose a city:</label>
+      <select name="city" id="city">
+      </select>
+      <br><br>
+      <input type="submit" value="Submit">
+    </form>
+    </div>
+
+    
+  </body>
+</html>
+<script>
+ var select= document.getElementById("city");
+ var options = ["Adana",
+ "Adelaide",
+ "Akita",
+ "Amman",
+ "Ankara",
+ "Arad",
+ "Arāk",
+ "Bacău",
+ "Baia Mare",
+ "Bandar Abbas",
+ "Braşov",
+ "Breda",
+ "Brisbane",
+ "Brăila",
+ "Bucharest",
+ "Calama",
+ "Canberra",
+ "Chillán",
+ "Cluj - Napoca",
+ "Colombo",
+ "Constanţa",
+ "Craiova",
+ "Darwin",
+ "Denizli",
+ "Dordrecht",
+ "Eindhoven",
+ "Fukuoka",
+ "Galaţi",
+ "Groningen",
+ "Hiroshima",
+ "Irbid",
+ "Istanbul",
+ "İzmir",
+ "Kagoshima",
+ "Kaunas",
+ "Khorramshahr",
+ "Kochi",
+ "Konya",
+ "Launceston",
+ "Maastricht",
+ "Mashhad",
+ "Matsuyama",
+ "Melbourne",
+ "Niigata",
+ "Nijmegen",
+ "Orūmīyeh",
+ "Piteşti",
+ "Qom",
+ "Quito",
+ "Rancagua",
+ "Saint - Denis",
+ "Saitama",
+ "Sapporo",
+ "Sivas",
+ "Stavanger",
+ "Sydney",
+ "Takamatsu",
+ "Tehran",
+ "The Hague",
+ "Thessaloníki",
+ "Toyama",
+ "Trabzon",
+ "Trondheim",
+ "Wakayama",
+ "Wollongong",
+ "Yazd",
+ "Zanjān"];
+for(var i = 0; i < options.length; i++){
+  var opt = options[i];
+  var el = document.createElement("option");
+  el.textContent = opt;
+  el.value = opt.value;
+   el.setAttribute("value",opt)
+    select.appendChild(el)
+}
+</script>
+
+
+
+

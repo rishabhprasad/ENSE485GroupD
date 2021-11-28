@@ -13,11 +13,9 @@ KAFKA_TOPIC = "AirQuality2020"
 schema_url = "http://localhost:8081"
 
 def foreach_batch(df, epoch_id):
-    df.format("jdbc").option("url","jdbc:postgresql://localhost:5432/ENSE485") \
-    .option("dbtable", "unhealthy_pm25") \
-    .option("user", "aqicn") \
-    .option("password", "GuiltySpark343") \
-    .save()
+    jdbcProperties = {"user":"aqicn", "password":"GuiltySpark343",  "driver": 'org.postgresql.Driver'} # "driver": 'com.mysql.jdbc.Driver'
+    df.write.jdbc(url="jdbc:postgresql://localhost:5432/ENSE485", table="unhealthy_pm25",
+    mode="append", properties=jdbcProperties)
 
 def main():
     
@@ -75,7 +73,7 @@ def main():
     .format('console') \
     .outputMode('update') \
     .option("truncate", "false") \
-    .start().awaitTermination()
+    .start()
 
     
     # outputDF.writeStream \
@@ -86,10 +84,10 @@ def main():
     # .start() \
     # .awaitTermination()
 
-    # outputDF.writeStream \
-    # .foreachBatch(foreach_batch) \
-    # .start() \
-    # .awaitTermination()
+    outputDF.writeStream \
+    .foreachBatch(foreach_batch) \
+    .start() \
+    .awaitTermination()
     
 if __name__ == '__main__':
     main()
