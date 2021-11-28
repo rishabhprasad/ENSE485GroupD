@@ -38,6 +38,7 @@ pip install -r requirements.txt
 ### Kafka Sink Commands
 
 ```bash
+
 curl -X PUT http://localhost:8083/connectors/sink-postgres-airQ/config \
     -H "Content-Type: application/json" \
     -d '{
