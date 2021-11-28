@@ -12,6 +12,13 @@ KAFKA_TOPIC = "AirQuality2020"
 # SCHEMA_REGISTRY_URL = "http://172.20.0.8:8081"
 schema_url = "http://localhost:8081"
 
+def foreach_batch(df, epoch_id):
+    df.format("jdbc").option("url","jdbc:postgresql://localhost:5432/ENSE485") \
+    .option("dbtable", "unhealthy_pm25") \
+    .option("user", "aqicn") \
+    .option("password", "GuiltySpark343") \
+    .save()
+
 def main():
     
     spark = SparkSession.builder.appName("SSAirQuality").getOrCreate() 
@@ -30,7 +37,7 @@ def main():
         .format("kafka")
         .option("kafka.bootstrap.servers", KAFKA_BROKER)
         .option("subscribe", KAFKA_TOPIC) 
-        .option("startingOffsets", "latest") 
+        .option("startingOffsets", "earliest") 
         .load()
     )
 
@@ -56,16 +63,33 @@ def main():
     # .option("truncate", "false") \
     # .start()
     
+    # outputDF = hazardousDF.selectExpr('to_json(struct(*)) as value') \
+        # .select(to_avro("value", aqicn_schema).alias("value"))
+    # outputDF = hazardousDF
+    # outputDF.printSchema()
+
     outputDF = hazardousDF.selectExpr('to_json(struct(*)) as value') \
-        .select(to_avro("value").alias("value"))
+        # .select(F.to_json("value").alias("value"))
 
     outputDF.writeStream \
-    .format("kafka") \
-    .option("kafka.bootstrap.servers", KAFKA_BROKER) \
-    .option("topic", "HazardousPM25") \
-    .option("checkpointLocation","\tmp\kafka\checkpoint") \
-    .start() \
-    .awaitTermination()
+    .format('console') \
+    .outputMode('update') \
+    .option("truncate", "false") \
+    .start().awaitTermination()
+
+    
+    # outputDF.writeStream \
+    # .format("kafka") \
+    # .option("kafka.bootstrap.servers", KAFKA_BROKER) \
+    # .option("topic", "unhealthyPM25") \
+    # .option("checkpointLocation","\tmp\kafka\checkpoint") \
+    # .start() \
+    # .awaitTermination()
+
+    # outputDF.writeStream \
+    # .foreachBatch(foreach_batch) \
+    # .start() \
+    # .awaitTermination()
     
 if __name__ == '__main__':
     main()
