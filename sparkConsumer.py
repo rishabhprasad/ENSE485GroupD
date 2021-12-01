@@ -75,7 +75,6 @@ def main():
     .option("truncate", "false") \
     .start()
 
-    
     # outputDF.writeStream \
     # .format("kafka") \
     # .option("kafka.bootstrap.servers", KAFKA_BROKER) \
