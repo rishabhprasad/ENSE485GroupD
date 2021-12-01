@@ -55,17 +55,6 @@ def main():
         .where("value.specie == 'pm25' AND (value.median > 60 AND value.median < 120)")
     )
 
-    # hazardousDF.writeStream \
-    # .format('console') \
-    # .outputMode('update') \
-    # .option("truncate", "false") \
-    # .start()
-    
-    # outputDF = hazardousDF.selectExpr('to_json(struct(*)) as value') \
-        # .select(to_avro("value", aqicn_schema).alias("value"))
-    # outputDF = hazardousDF
-    # outputDF.printSchema()
-
     outputDF = hazardousDF.selectExpr('to_json(struct(*)) as value') \
         # .select(F.to_json("value").alias("value"))
 
@@ -74,15 +63,6 @@ def main():
     .outputMode('update') \
     .option("truncate", "false") \
     .start()
-
-    
-    # outputDF.writeStream \
-    # .format("kafka") \
-    # .option("kafka.bootstrap.servers", KAFKA_BROKER) \
-    # .option("topic", "unhealthyPM25") \
-    # .option("checkpointLocation","\tmp\kafka\checkpoint") \
-    # .start() \
-    # .awaitTermination()
 
     outputDF.writeStream \
     .foreachBatch(foreach_batch) \

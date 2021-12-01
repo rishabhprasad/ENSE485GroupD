@@ -79,7 +79,7 @@ predictions = r.evaluate(test_data)
 
 output = predictions.predictions.select("country","city","specie","prediction").where("specie = 'pm25'")
 
-output.printSchema()
+output.show()
 
 # output.write \
 #     .csv("./data/predictions/")
